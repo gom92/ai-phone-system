@@ -1,0 +1,15 @@
+; manager.conf.template - AI Phone System (TEMPLATE - password replaced at install)
+; AMI on loopback only. Placeholder __AMI_ADMIN_PASS__ is replaced by
+; scripts/install-configs.sh from secrets/sip-credentials.txt (mode 600).
+; The installed file lives at /etc/asterisk/manager.conf - NEVER commit it.
+
+[general]
+enabled=yes
+port=5038
+bindaddr=127.0.0.1
+
+[admin]
+secret=__AMI_ADMIN_PASS__
+permit=127.0.0.1/255.255.255.255
+read=system,call,log,verbose,command,agent,user,config,dtmf,reporting,cdr,dialplan,originate
+write=system,call,log,verbose,command,agent,user,config,dtmf,reporting,cdr,dialplan,originate

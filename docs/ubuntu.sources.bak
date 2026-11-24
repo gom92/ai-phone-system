@@ -1,0 +1,5 @@
+Types: deb
+URIs: http://azure.archive.ubuntu.com/ubuntu http://mirror.cogentco.com/pub/linux/ubuntu
+Suites: noble noble-updates noble-backports noble-security
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg

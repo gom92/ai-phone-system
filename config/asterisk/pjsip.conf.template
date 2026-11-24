@@ -1,0 +1,75 @@
+; pjsip.conf.template - AI Phone System (TEMPLATE - passwords replaced at install)
+; Signaling: TCP ONLY on 127.0.0.1:5060. No UDP transport is configured:
+; this container blocks unconnected UDP sends (seccomp), and a multi-peer
+; SIP socket must not be connect()ed per packet. RTP still uses UDP, but
+; each RTP session is a single-peer socket, handled by the LD_PRELOAD
+; shim (lib/udp_connect_shim.c). See README "UDP shim" section.
+; Placeholders __SIP_1001_PASS__ / __SIP_1002_PASS__ are replaced by
+; scripts/install-configs.sh from secrets/sip-credentials.txt (mode 600).
+; The installed file lives at /etc/asterisk/pjsip.conf - NEVER commit it.
+
+[transport-tcp]
+type=transport
+protocol=tcp
+bind=127.0.0.1:5060
+local_net=127.0.0.0/8
+
+[1001]
+type=endpoint
+context=internal
+disallow=all
+allow=ulaw,alaw
+auth=1001-auth
+aors=1001
+direct_media=no
+
+[1001-auth]
+type=auth
+auth_type=userpass
+username=1001
+password=__SIP_1001_PASS__
+
+[1001]
+type=aor
+max_contacts=3
+remove_existing=yes
+
+[1002]
+type=endpoint
+context=internal
+disallow=all
+allow=ulaw,alaw
+auth=1002-auth
+aors=1002
+direct_media=no
+
+[1002-auth]
+type=auth
+auth_type=userpass
+username=1002
+password=__SIP_1002_PASS__
+
+[1002]
+type=aor
+max_contacts=1
+remove_existing=yes
+
+[1003]
+type=endpoint
+context=internal
+disallow=all
+allow=ulaw,alaw
+auth=1003-auth
+aors=1003
+direct_media=no
+
+[1003-auth]
+type=auth
+auth_type=userpass
+username=1003
+password=__SIP_1003_PASS__
+
+[1003]
+type=aor
+max_contacts=1
+remove_existing=yes

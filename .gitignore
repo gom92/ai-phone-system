@@ -1,0 +1,18 @@
+# Secrets and runtime state - never commit.
+secrets/
+data/
+recordings/
+logs/
+models/
+venv-ai/
+*.db
+*.sqlite3
+*.log
+__pycache__/
+*.pyc
+# Built pjsua binary and pjproject source (large, rebuildable).
+src/pjproject/
+# Local test artifacts that are not source.
+*.wav
+*.mp3
+lib/*.so
